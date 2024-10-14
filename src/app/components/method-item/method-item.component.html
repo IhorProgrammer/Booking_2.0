@@ -1,0 +1,68 @@
+
+<div>
+    <div>
+        <div class="info">
+            <div class="info-method">
+                <span class="method-name" [class]="data.methodName">{{data.methodName}}</span>
+                <h1>{{data.name}}</h1>
+            </div>
+            <p>{{data.text}}</p>
+        </div>
+
+        <div class="form-container">
+            <div class="form-title">
+                @if( data.form.encryption ) {
+                    <img src="/icon/securityn.png" alt="security">
+                }
+                @if( data.form.fields.length > 1 ) {
+                    <h3>Form</h3>
+                }
+                @else { 
+                    <h3>Sender</h3>
+                }   
+            </div>
+            <form (submit)="data.Submit()">
+                @for (field of data.form.fields; track $index) {
+                    <div class="input-group mb-3" >
+                        <label class="input-group-text" [for]="field.name">{{field.text}}</label>
+                        <input [type]="field.type" [id]="field.name" class="form-control" [name]="field.name" [(ngModel)]="field.value" />
+                    </div>
+                }
+
+                @if( !data.loading ) {
+                    <button type="submit">Submit</button>
+                }
+                @else { 
+                    <bkng-loading-bar class="loading-bar"></bkng-loading-bar>
+                }
+            </form>
+        </div>
+    
+        <div>
+            <div class="switch-panel">
+                @for (item of ConditionsArray; track $index) {
+                    <div [class]="condition() === item?'active':''" (click)="condition.set(item)">{{item}}</div>
+                }
+            </div>
+
+            
+
+            @switch (condition()) {
+                @case ("Code") {
+                    <div class="code-container">
+                        <button class="copy-button" [class]="CopyCodeText" (click)="copyCode()">{{CopyCodeText}}</button>
+                        <pre><code>{{data.form.submit}}</code></pre>
+                    </div>
+                }
+                @case ("Response") {
+                    <div class="json-container"><pre>{{data.Response}}</pre></div>
+                }
+                @case ("View") {
+                    <ng-content></ng-content>
+                }
+            }
+            
+        </div>
+    </div>
+</div>
+

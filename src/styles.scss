@@ -1,0 +1,23 @@
+main{
+    margin: 40px 0;
+}
+
+* {
+    font-family: "Shantell Sans", cursive !important;
+}
+
+h1, h2, h3, h4, h5, h5, p, a, li::marker, span.neon, .neon {
+    color: #57FF44 !important;
+    filter: drop-shadow(1px 1px 0.1px #ffffff51);
+}
+h1, h2, h3, h4, h5, h5, p, a {
+    cursor: default;    
+}
+
+body {
+    background-color: #0C1316;
+}
+
+label {
+    cursor: text;
+}

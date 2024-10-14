@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract File by Name from ZIP</title>
+</head>
+<body>
+    <h1>Extract File by Name</h1>
+
+    <!-- Введення імені файлу -->
+    <input type="text" id="fileNameInput" placeholder="Enter file name (e.g. component.html)" />
+
+    <!-- Кнопка для вибору ZIP-файлу -->
+    <input type="file" id="zipFileInput" />
+
+    <!-- Контейнер для відображення контенту -->
+    <div id="file-content"></div>
+
+    <!-- Підключення JSZip бібліотеки -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+
+    <script>
+        document.getElementById('zipFileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];  // Отримуємо вибраний ZIP-файл
+            const fileName = document.getElementById('fileNameInput').value;  // Отримуємо ім'я файлу для пошуку
+
+            if (file && fileName) {
+                const zip = new JSZip();  // Створюємо екземпляр JSZip
+                const reader = new FileReader();  // Створюємо FileReader для читання ZIP
+
+                reader.onload = function(e) {
+                    zip.loadAsync(e.target.result).then(function(zip) {
+                        // Отримання всіх файлів для перевірки імен
+                        const files = Object.keys(zip.files);
+                        console.log("Файли в ZIP:", files);
+
+                        // Перевіряємо наявність файлу по імені
+                        const matchedFile = zip.file(fileName);
+                        if (matchedFile) {
+                            return matchedFile.async("string");
+                        } else {
+                            throw new Error("File not found in ZIP: " + fileName);
+                        }
+                    }).then(function(content) {
+                        // Виводимо контент файлу
+                        document.getElementById('file-content').innerHTML = content;
+                        saveFile(content, fileName); 
+                    }).catch(function(err) {
+                        console.error("Error extracting file: ", err);
+                        document.getElementById('file-content').innerHTML = "File not found or another error occurred.";
+                    });
+                };
+
+                // Читаємо ZIP як двійкові дані
+                reader.readAsArrayBuffer(file);
+            } else {
+                alert('Please select a ZIP file and enter a file name.');
+            }
+        });
+
+        function saveFile(content, fileName) {
+            const blob = new Blob([content], { type: "text/html" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+    </script>
+</body>
+</html>
