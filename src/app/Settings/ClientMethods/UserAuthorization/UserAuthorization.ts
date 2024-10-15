@@ -26,7 +26,7 @@ export default new MethodInfoClass(
 
           // GET Salt
           const salt = localStorage.getItem('dc_server_salt');
-          //GET token
+          //GET token 
           const token = localStorage.getItem('dc_auth_key');
           if( salt == null || token == null ) {
               alert("User did not receive unique tokens")

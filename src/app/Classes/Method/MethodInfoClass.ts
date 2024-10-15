@@ -45,6 +45,9 @@ export class MethodInfoClass {
                 this.Response = JSON.stringify(res, null, 2);
                 this._loading = false; 
             }, 1400);
+        }).catch( ( res: any ) => {
+            this.Response = JSON.stringify(res, null, 2);
+            this._loading = false; 
         });
     }
 

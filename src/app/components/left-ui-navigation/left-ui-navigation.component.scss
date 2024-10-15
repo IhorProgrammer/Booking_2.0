@@ -1,0 +1,17 @@
+.vertial-line-neon {
+    border-radius: 10px;
+    height: 100%;
+    width: 10px;
+    box-shadow: 1px 1px 20px #DB1BB5;
+    background: rgb(219,27,181);
+    background: linear-gradient(180deg, rgba(219,27,181,1) 0%, rgba(176,25,176,1) 52%, rgba(136,27,219,1) 100%);
+}
+
+.vertial-line-neon-area {
+    position: fixed;
+    left: 20px;
+    top: 100px;
+    height: 80%;
+    width: 40px;
+    border: 1px solid #DB1BB5;
+}

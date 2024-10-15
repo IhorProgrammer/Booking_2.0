@@ -1,21 +1,20 @@
 import { Routes } from '@angular/router';
-import * as dataToPath from './Settings/path.json';
-import UserAuthorization from './Settings/ClientMethods/UserAuthorization/UserAuthorization';
+import dataToPath from './Settings/path';
 
 
-const filteredObject = Object.fromEntries(
-    Object.entries(dataToPath).filter(([key]) => key !== 'default')
-);
-const keys = Object.keys(filteredObject);
+
+const filteredObject = Object.fromEntries(Object.entries(dataToPath));
 
 let r: Routes = []; 
-keys.map( global => { 
-    const local = Object.keys(filteredObject[global]).map( local => {
+
+Object.keys(filteredObject).map( globalKey => { 
+    const localArray = Object.fromEntries(Object.entries(filteredObject[globalKey]));
+    const local = Object.keys(localArray).map( localKey => {
         return { 
-            path: `${global}/${local}`, 
+            path: `${globalKey}${localKey == ""?"":"-"}${localKey}`, 
             loadComponent: () => import('./components/method-item/method-item.component').then(m => m.MethodItemComponent), 
             data: {
-                data: UserAuthorization
+                data: () => localArray[localKey].then((x)=>  x.default)
             },
         } 
     })
@@ -23,4 +22,9 @@ keys.map( global => {
 })
 
 
+
+
 export const routes: Routes = r;
+
+
+

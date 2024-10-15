@@ -22,7 +22,9 @@ export class MethodItemComponent  implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.data = this.route.snapshot.data['data'];
+    this.route.snapshot.data['data']().then((x: MethodInfoClass) => {
+      this.data = x
+    });
   }
 
   public get Response(): string {
@@ -36,9 +38,6 @@ export class MethodItemComponent  implements OnInit {
   }
 
   public copyCode(): void {
-    // Отримуємо текст з елемента <code>
-  
-    console.log( this.data.form.submit.toString() );
     navigator.clipboard.writeText(this.data.form.submit.toString())
     .then(() => {
       this._copyCodeText = "Save";    
