@@ -1,3 +1,72 @@
-<div class="vertial-line-neon-area" (dblclick)="UpdatePage()">
+<div class="vertial-line-neon-area" (dblclick)="UpdatePage()" (click)="MenuShow.set(true)">
     <div class="vertial-line-neon"></div>
+</div>
+<div class="navigation-panel" [class]="MenuShow()?'toggled':''">
+    <div class="navigation-relative">
+        <div class="large circle"></div>
+        <div class="medium circle"></div>
+        <div class="medium circle">
+            @for (NavMenu of NavsMenu.routes; track $index) {
+                @if( NavMenu.routes != undefined ) {
+                    <a [routerLink]="'/' + NavMenu.url" (click)="NextLink($index)" class="menu-nav-option menu-option" style="--angle: {{NavsMenu.Angle($index)}}deg;">
+                        <div class="stabilizer" style="--angle: {{NavsMenu.Angle($index)}}deg;">
+                            <h3 [class]="NavMenu.UrlActive?'neon':''">{{NavMenu.nameUrl}}</h3>
+                        </div>
+                    </a>
+                }
+                @else {
+                    <a  [routerLink]="'/' + NavMenu.url" (click)="NextLink($index)" class="menu-nav-option menu-option" style="--angle: {{NavsMenu.Angle($index)}}deg;">
+                        <div class="stabilizer" style="--angle: {{NavsMenu.Angle($index)}}deg;">
+                            <h3 [class]="NavMenu.UrlActive?'neon':''">{{NavMenu.nameUrl}}</h3>
+                        </div>
+                    </a>
+                }
+            }
+        </div>
+
+        <div class="small circle">
+            @if( NavsMenu.url === "" ) {
+                <a [routerLink]="'/'" (click)="StartMenu()" class="menu-quick-option menu-option" style="--angle: {{getMediumCircleAngles[0].angle}}deg;">
+                    <div class="stabilizer" style="--angle: {{getMediumCircleAngles[0].angle * -1}}deg;">
+                        <img src="icon/menu.svg" alt="menu">
+                        <h3 class="tooltip">Меню</h3>
+                    </div>
+                </a>
+            }
+            @else {
+                <a (click)="PrevLink()" class="menu-quick-option menu-option transition-null" style="--angle: {{getMediumCircleAngles[0].angle}}deg;">
+                    <div class="stabilizer" style="--angle: {{getMediumCircleAngles[0].angle * -1}}deg;">
+                        <img src="icon/left_arrow.svg" alt="menu">
+                        <h3 class="tooltip">Назад</h3>
+                    </div>
+                </a>
+            }
+            
+            <a href="https://www.figma.com/file/VZpiGXVFMu9H2zE2vWNKak?node-id=24-3&node-type=canvas&t=USPAj90PcT6bViHm-0&type=design&mode=design&fuid=1210145647661649638" class="menu-quick-option menu-option" style="--angle: {{getMediumCircleAngles[1].angle}}deg;">
+                <div class="stabilizer" style="--angle: {{getMediumCircleAngles[1].angle * -1}}deg;">
+                    <img src="icon/figma.png" alt="menu">
+                    <h3 class="tooltip">Проект у Figma</h3>
+                </div>
+            </a>
+            <a href="" class="menu-quick-option menu-option" style="--angle: {{getMediumCircleAngles[2].angle}}deg;">
+                <div class="stabilizer" style="--angle: {{getMediumCircleAngles[2].angle * -1}}deg;">
+                    <img src="icon/settings.png" alt="menu">
+                    <h3 class="tooltip">Налаштування</h3>
+                </div>
+            </a>
+            <a href="" class="menu-quick-option menu-option" style="--angle: {{getMediumCircleAngles[3].angle}}deg;">
+                <div class="stabilizer" style="--angle: {{getMediumCircleAngles[3].angle * -1}}deg;">
+                    <img src="icon/viewn.png" alt="menu">
+                    <h3 class="tooltip">Показ всіх </h3>
+                </div>
+            </a>
+            <a href="" class="menu-quick-option menu-option" style="--angle: {{getMediumCircleAngles[4].angle}}deg;">
+                <div class="stabilizer" style="--angle: {{getMediumCircleAngles[4].angle * -1}}deg;">
+                    <img src="icon/github.png" alt="menu">
+                    <h3 class="tooltip">Репозиторій</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="blackboard" (click)="MenuShow.set(false)"></div>
 </div>

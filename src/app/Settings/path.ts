@@ -4,6 +4,11 @@ const path = {
         "": import("./ClientMethods/UserAuthorization/UserAuthorization"),
         "authorization": import("./ClientMethods/UserAuthorization/UserAuthorization"),
         "registration": import("./ClientMethods/UserRegistration/UserRegistration")
+    },
+    "token": {
+        "": import("./ClientMethods/UserAuthorization/UserAuthorization"),
+        "authorization": import("./ClientMethods/UserAuthorization/UserAuthorization"),
+        "registration": import("./ClientMethods/UserRegistration/UserRegistration")
     }
 };
 

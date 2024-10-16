@@ -6,7 +6,16 @@ main{
     font-family: "Shantell Sans", cursive !important;
 }
 
-h1, h2, h3, h4, h5, h5, p, a, li::marker, span.neon, .neon {
+.transition-null {
+    transition: none;
+    transition-duration: 0s;
+}
+
+h1, h2, h3, h4, h5, h5, p, a, li::marker {
+    color: #57FF44;
+    filter: drop-shadow(1px 1px 0.1px #ffffff51);
+}
+.neon {
     color: #57FF44 !important;
     filter: drop-shadow(1px 1px 0.1px #ffffff51);
 }
