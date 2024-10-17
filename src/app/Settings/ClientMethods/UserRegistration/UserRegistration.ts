@@ -1,7 +1,8 @@
+import { input } from "@angular/core";
 import { ConnectionName } from "../../../Classes/AppSetting/Connection";
 import { MethodFieldClass } from "../../../Classes/Method/MethodFieldClass";
 import { MethodFormClass } from "../../../Classes/Method/MethodFormClass";
-import { MethodInfoClass } from "../../../Classes/Method/MethodInfoClass";
+import { GetFormData, MethodInfoClass } from "../../../Classes/Method/MethodInfoClass";
 
 export default new MethodInfoClass( 
       "Реєстрація користувачів", 
@@ -12,8 +13,9 @@ export default new MethodInfoClass(
         false,
         [ 
           new MethodFieldClass("avatar", "Аватар", "file", ""), 
-          new MethodFieldClass("real_name", "ІПБ", "text", ""), 
           new MethodFieldClass("nickname", "Нікнейм (login)", "text", ""), 
+          new MethodFieldClass("given_name", "Імя", "text", ""), 
+          new MethodFieldClass("family_name", "Прізвище", "text", ""), 
           new MethodFieldClass("email", "Email", "email", ""), 
           new MethodFieldClass("phone", "Телефон", "tel", ""), 
           new MethodFieldClass("birthday", "Дата народження", "date", ""), 
@@ -22,19 +24,17 @@ export default new MethodInfoClass(
           new MethodFieldClass("password", "Пароль", "password", ""), 
 
         ],
-        function (connection, event) {
+        (connection, event) => {
             //GET UserAgent
             const userAgent = navigator.userAgent; 
             //GET FORM
-            const form = event.target; 
+            const formHTML = event.target; 
             //_________________VALIDATION START______________________
             //_________________VALIDATION END______________________
 
-            
-            const formData = new FormData(event.target);
-            formData.set("gender", form.elements['gender'].value == 'M'? 'true' : 'false' )
+            const formData = GetFormData(formHTML)
             formData.append("user_agent", userAgent )
-
+            
             //GET TOKEN
             const token = localStorage.getItem('dc_auth_key');
             if( token == null ) {

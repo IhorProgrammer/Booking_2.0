@@ -22,7 +22,7 @@ export default class Connection {
     }
     
     private get TokenConnection() : string {
-        return appsetting.connection.ClientServer;
+        return appsetting.connection.TokenServer;
     }
     
     constructor() {}

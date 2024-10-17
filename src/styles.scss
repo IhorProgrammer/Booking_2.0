@@ -6,6 +6,10 @@ main{
     font-family: "Shantell Sans", cursive !important;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .transition-null {
     transition: none;
     transition-duration: 0s;

@@ -1,20 +1,22 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { routes } from '../../app.routes';
+import { LinkInfo } from '../../Classes/ILinkInfo/LinkInfo';
+import paths from '../../appSettings';
 
 
 class NavMenu {
   public routes?: NavMenu[]; 
+  public isHideMethod: boolean = false;
   public nameUrl!: string;
   public url!: string;
   private _next?: NavMenu;
 
-  private angleShag: number = 10;
+  private angleShag: number = 5;
   private startAngle: number = 0;
 
   private urlActiveIndex: boolean = false;
 
-  constructor(url: string, nameUrl: string, routes?: NavMenu[]) {
+  constructor(url: string, nameUrl: string, routes?: NavMenu[], fullRoutes: boolean = false) {
     this.url = url;
     this.nameUrl = nameUrl;
     this.routes = routes;
@@ -22,7 +24,6 @@ class NavMenu {
     if( this.routes != undefined ) {
       this.startAngle = (this.routes.length - 1) * this.angleShag / -2;
     }
-
   }
 
   public get UrlActive(): boolean {
@@ -75,23 +76,29 @@ class NavMenu {
 
     return undefined; 
   }
+
+
+  public static ByLinkInfo(value: LinkInfo): NavMenu {
+    const routes: NavMenu[] | undefined = value.links?.map(link => NavMenu.ByLinkInfo(link));
+    return new NavMenu(value.url, value.nameUrl, routes);
+  }
 }
 
 
-const navTest: NavMenu = new NavMenu(
-  "", 
-  "Головна", 
-  [
-    new NavMenu("client", "Client_API", [
-      new NavMenu("client-authorization", "Авторизація"),
-      new NavMenu("client-registration", "Реєстрація")
-    ]),
-    new NavMenu("token", "Token_API", [
-      new NavMenu("token-authorization", "Авторизація"),
-      new NavMenu("token-registration", "Реєстрація")
-    ]),
-  ]
-);
+// const navTest: NavMenu = new NavMenu(
+//   "", 
+//   "Головна", 
+//   [
+//     new NavMenu("client", "Client_API", [
+//       new NavMenu("client-authorization", "Авторизація"),
+//       new NavMenu("client-registration", "Реєстрація")
+//     ]),
+//     new NavMenu("token", "Token_API", [
+//       new NavMenu("token-authorization", "Авторизація"),
+//       new NavMenu("token-registration", "Реєстрація")
+//     ]),
+//   ]
+// );
 
 
 
@@ -108,13 +115,16 @@ export class LeftUiNavigationComponent implements OnInit  {
 
   public NavsMenu!: NavMenu;
   public get CurrentPathname() {
-    return window.location.pathname.substring(1);
-
+    if (typeof window !== "undefined") {
+      return window.location.pathname.substring(1);
+    }
+    return "";
   }
 
   ngOnInit(): void {
-    this.NavsMenu = navTest;
-    const path = navTest.findRoutePath(this.CurrentPathname);
+
+    this.NavsMenu = NavMenu.ByLinkInfo( paths );
+    const path = this.NavsMenu.findRoutePath(this.CurrentPathname);
     if( path != undefined ) {
       path.forEach( (index) => {
         this.NavsMenu = this.NavsMenu.Next(index);
@@ -138,7 +148,13 @@ export class LeftUiNavigationComponent implements OnInit  {
   
   public HideShowMethod = signal(false);
 
-  public MenuShow = signal(true);
+  public MenuShow = signal("close");
+  public ToggleMenu() {
+    if( this.MenuShow() == "open" )
+      this.MenuShow.set("close");
+    else 
+      this.MenuShow.set("open");
+  }
 
   private ArrayShag(angleShag: number, arrData: any[]) {
     const filterArr = arrData.filter(x => x != "default" && x != "end");

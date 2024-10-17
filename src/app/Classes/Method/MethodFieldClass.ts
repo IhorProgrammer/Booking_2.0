@@ -19,6 +19,8 @@ export class MethodFieldClass {
         this.value = value;
     }
 
-
+    public ToFormDataField()   {
+        return { name: this._name, value: this.value }
+    }
 
 }

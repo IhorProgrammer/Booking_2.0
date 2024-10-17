@@ -37,10 +37,11 @@ export class MethodInfoClass {
     }
     
 
-    public Submit() {
+    public Submit(event: SubmitEvent) {
         event?.preventDefault();
+        console.log(event);
         this._loading = true;
-        const res = this.form.submit(this.connection, event).then((res: any) => {
+        const res = this.form.submit(this.connection, event ).then((res: any) => {
             setTimeout(() => { 
                 this.Response = JSON.stringify(res, null, 2);
                 this._loading = false; 
@@ -61,4 +62,26 @@ export class MethodInfoClass {
         this.form = form;
     }
 
+}
+
+export function GetFormData(formHTML: HTMLFormElement): FormData {
+    
+    const formElements = formHTML.querySelectorAll('[ng-reflect-name]') as NodeListOf<HTMLInputElement>;
+    const formData = new FormData();
+
+    formElements.forEach((inputElem: HTMLInputElement) => {
+        // Отримання імені з атрибута ng-reflect-name
+        const name = inputElem.getAttribute('ng-reflect-name');
+        
+        if (inputElem.type === 'file') {
+            const files = inputElem.files; 
+            if (files) {
+                formData.append(name || inputElem.id, files[0]); 
+            }
+        } else {
+            formData.append(name || inputElem.id, inputElem.value || "");
+        }
+    });
+    
+    return formData;
 }

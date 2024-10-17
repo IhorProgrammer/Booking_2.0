@@ -18,7 +18,14 @@ export class MethodFormClass {
         return this._submit 
     }
 
-
+    public get FormData(): FormData{
+        const formData = new FormData();
+        this._fields.forEach( field => {
+            const formDataField = field.ToFormDataField()
+            formData.append(formDataField.name, formDataField.value);
+        })
+        return formData;
+    }
     
 
     constructor(encryption: boolean, fields: MethodFieldClass[], submit: MethodSubmitFunctionParam) {
