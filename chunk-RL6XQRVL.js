@@ -1,0 +1,1 @@
+var t=class{_name;get name(){return this._name}_text;get text(){return this._text}_type;get type(){return this._type}value;constructor(e,i,r,n=""){this._name=e,this._text=i,this._type=r,this.value=n}ToFormDataField(){return{name:this._name,value:this.value}}};export{t as a};
