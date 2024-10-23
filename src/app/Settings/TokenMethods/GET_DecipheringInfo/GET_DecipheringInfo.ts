@@ -18,5 +18,6 @@ export default new MethodInfoClass(
             resolve("Не має коду, використовується між серверами");
           })
         } 
-    ) 
+      ),
+      [false, false, false] 
   )

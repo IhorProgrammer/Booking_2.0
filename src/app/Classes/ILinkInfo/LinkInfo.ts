@@ -1,6 +1,7 @@
 import path from "path";
 import { MethodItemComponent } from "../../components/method-item/method-item.component";
 import { Routes } from "@angular/router";
+import { MethodResolver } from "../../resolvers/MethodResolver";
 
 export class LinkInfo {
     public nameUrl: string;
@@ -26,9 +27,14 @@ export class LinkInfo {
                 routes.push({
                     path: this.url,
                     component: MethodItemComponent, // Assuming MethodItemComponent is defined elsewhere
+                    resolve: {
+                        access: MethodResolver // Додаємо Resolver
+                    },
                     data: {
+                        isHideMethod: this.isHideMethod, // Передайте isHideMethod в data
                         data: () => this.method.then((x: any) => x.default)
                     }
+
                 });
             }
         }

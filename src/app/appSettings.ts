@@ -41,7 +41,9 @@ const paths: LinkInfo = new LinkInfo(
                 new LinkInfo(
                     "S_Отримання salt",
                     "token-get-salt",
-                    import("./Settings/TokenMethods/GET_ReceivingSaltTokens/GET_ReceivingSaltTokens"),                    
+                    import("./Settings/TokenMethods/GET_ReceivingSaltTokens/GET_ReceivingSaltTokens"),     
+                    undefined,
+                    true               
                 ),
                 new LinkInfo(
                     "Генерація токенів",
@@ -51,12 +53,16 @@ const paths: LinkInfo = new LinkInfo(
                 new LinkInfo(
                     "S_Підписка користувача",
                     "token-sub-user",
-                    import("./Settings/TokenMethods/PUT_UserSubscription/PUT_UserSubscription"),                    
+                    import("./Settings/TokenMethods/PUT_UserSubscription/PUT_UserSubscription"),    
+                    undefined,
+                    true                 
                 ),
                 new LinkInfo(
                     "S_Дешифрування",
                     "token-decryption",
-                    import("./Settings/TokenMethods/GET_DecipheringInfo/GET_DecipheringInfo"),                    
+                    import("./Settings/TokenMethods/GET_DecipheringInfo/GET_DecipheringInfo"),     
+                    undefined,
+                    true                
                 ),
                 new LinkInfo(
                     "Отримання сесій",
@@ -76,7 +82,9 @@ const paths: LinkInfo = new LinkInfo(
                 new LinkInfo(
                     "S_Google Auth",
                     "token-get-google-s",
-                    import("./Settings/TokenMethods/GET_GoogleAuthorizationServer/GET_GoogleAuthorizationServer"),                    
+                    import("./Settings/TokenMethods/GET_GoogleAuthorizationServer/GET_GoogleAuthorizationServer"),  
+                    undefined,
+                    true                   
                 ),
             ]
         ),

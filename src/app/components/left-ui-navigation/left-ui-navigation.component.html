@@ -53,10 +53,16 @@
                     <h3 class="tooltip">Налаштування</h3>
                 </div>
             </a>
-            <a class="menu-quick-option menu-option" style="--angle: {{getMediumCircleAngles[3].angle}}deg;">
+            <a class="menu-quick-option menu-option" (click)="HideShowMethod()" style="--angle: {{getMediumCircleAngles[3].angle}}deg;">
                 <div class="stabilizer" style="--angle: {{getMediumCircleAngles[3].angle * -1}}deg;">
-                    <img src="icon/viewn.png" alt="menu">
-                    <h3 class="tooltip">Показ всіх</h3>
+                    @if(isDevOps) {
+                        <img src="icon/privaten.png" alt="menu">
+                        <h3 class="tooltip">DevOps</h3>
+                    }
+                    @else {
+                        <img src="icon/viewn.png" alt="menu">
+                        <h3 class="tooltip">Web</h3>
+                    }
                 </div>
             </a>
             <a href="https://github.com/IhorProgrammer/Booking_2.0" class="menu-quick-option menu-option" style="--angle: {{getMediumCircleAngles[4].angle}}deg;">

@@ -9,43 +9,42 @@
                 <p>{{data.text}}</p>
             </div>
     
-            <div class="form-container">
-                <div class="form-title">
-                    @if( data.form.encryption ) {
-                        <img src="/icon/securityn.png" alt="security">
-                    }
-                    @if( data.form.fields.length > 1 ) {
-                        <h3>Form</h3>
-                    }
-                    @else { 
-                        <h3>Sender</h3>
-                    }   
-                </div>
-                <form #myForm="ngForm" (ngSubmit)="data.Submit($event)">
-                    @for (field of data.form.fields; track $index) {
-                        <div class="input-group mb-3" >
-                            <label class="input-group-text" [for]="field.name">{{field.text}}</label>
-                            <input [type]="field.type" [id]="field.name" class="form-control" [name]="field.name" [(ngModel)]="field.value"/>
-                        </div>
-                    }
-    
-                    @if( !data.loading ) {
-                        <button type="submit">Submit</button>
-                    }
-                    @else { 
-                        <bkng-loading-bar class="loading-bar"></bkng-loading-bar>
-                    }
-                </form>
-            </div>
+            @if( data.codeShow || data.responseShow || data.viewShow) {
+                <div class="form-container">
+                    <div class="form-title">
+                        @if( data.form.encryption ) {
+                            <img src="/icon/securityn.png" alt="security">
+                        }
+                        @if( data.form.fields.length > 1 ) {
+                            <h3>Form</h3>
+                        }
+                        @else { 
+                            <h3>Sender</h3>
+                        }   
+                    </div>
+                    <form #myForm="ngForm" (ngSubmit)="data.Submit($event)">
+                        @for (field of data.form.fields; track $index) {
+                            <div class="input-group mb-3" >
+                                <label class="input-group-text" [for]="field.name">{{field.text}}</label>
+                                <input [type]="field.type" [id]="field.name" class="form-control" [name]="field.name" [(ngModel)]="field.value"/>
+                            </div>
+                        }
         
+                        @if( !data.loading ) {
+                            <button type="submit">Submit</button>
+                        }
+                        @else { 
+                            <bkng-loading-bar class="loading-bar"></bkng-loading-bar>
+                        }
+                    </form>
+                </div>
+            }
             <div>
                 <div class="switch-panel">
                     @for (item of ConditionsArray; track $index) {
                         <div [class]="condition() === item?'active':''" (click)="condition.set(item)">{{item}}</div>
                     }
                 </div>
-    
-                
     
                 @switch (condition()) {
                     @case ("Code") {
@@ -57,8 +56,8 @@
                     @case ("Response") {
                         <div class="json-container"><pre>{{data.Response}}</pre></div>
                     }
-                    @case ("View") {
-                        <ng-content></ng-content>
+                    @case ("View" ) {
+                        <bkng-view-component [template-url]="data.ViewTemplate.HTML ?? ''" [data]="data.Response"></bkng-view-component>
                     }
                 }
                 

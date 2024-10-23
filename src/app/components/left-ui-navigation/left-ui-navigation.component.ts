@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LinkInfo } from '../../Classes/ILinkInfo/LinkInfo';
 import paths from '../../appSettings';
+import { link } from 'fs';
 
 
 class NavMenu {
@@ -79,7 +80,13 @@ class NavMenu {
 
 
   public static ByLinkInfo(value: LinkInfo): NavMenu {
-    const routes: NavMenu[] | undefined = value.links?.map(link => NavMenu.ByLinkInfo(link));
+    let links = value.links;
+    if(typeof window !== 'undefined') {
+      const isDevOps = localStorage.getItem('DevOps') === 'true';
+      if(!isDevOps)
+        links = links?.filter(link => !link.isHideMethod)
+    }
+    const routes: NavMenu[] | undefined = links?.map(link => NavMenu.ByLinkInfo(link));
     return new NavMenu(value.url, value.nameUrl, routes);
   }
 }
@@ -122,14 +129,7 @@ export class LeftUiNavigationComponent implements OnInit  {
   }
 
   ngOnInit(): void {
-
-    this.NavsMenu = NavMenu.ByLinkInfo( paths );
-    const path = this.NavsMenu.findRoutePath(this.CurrentPathname);
-    if( path != undefined ) {
-      path.forEach( (index) => {
-        this.NavsMenu = this.NavsMenu.Next(index);
-      })
-    }
+    this.SetNavMenu();
   }
 
   public NextLink(index: number) { this.NavsMenu = this.NavsMenu.Next(index); }
@@ -146,7 +146,18 @@ export class LeftUiNavigationComponent implements OnInit  {
     window.location.reload();
   }
   
-  public HideShowMethod = signal(false);
+  public HideShowMethod() {
+    if(typeof window === 'undefined') return;
+    const isDevOps = localStorage.getItem('DevOps') === 'true';
+    if(isDevOps) localStorage.setItem("DevOps", 'false');
+    else localStorage.setItem("DevOps", 'true');
+    this.SetNavMenu();
+  };
+  public get isDevOps() {
+    if(typeof window !== 'undefined')
+      return localStorage.getItem('DevOps') === 'true'
+    return false;
+  }
 
   public MenuShow = signal("close");
   public ToggleMenu() {
@@ -154,6 +165,17 @@ export class LeftUiNavigationComponent implements OnInit  {
       this.MenuShow.set("close");
     else 
       this.MenuShow.set("open");
+  }
+
+  private SetNavMenu(){
+    this.NavsMenu = NavMenu.ByLinkInfo( paths );
+    const path = this.NavsMenu.findRoutePath(this.CurrentPathname);
+    if( path != undefined ) {
+      path.forEach( (index) => {
+        this.NavsMenu = this.NavsMenu.Next(index);
+      })
+    }
+
   }
 
   private ArrayShag(angleShag: number, arrData: any[]) {

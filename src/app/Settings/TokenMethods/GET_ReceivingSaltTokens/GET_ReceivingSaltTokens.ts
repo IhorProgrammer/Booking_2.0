@@ -8,11 +8,13 @@ export default new MethodInfoClass(
       "Використовується для перевірки на те що токен вже пройшов авторизацію і отримання salt, що використовуэться для шифрування, дешифрування між клієнтом і сервером.",
       ConnectionName.Token, 
       new MethodFormClass( 
-        false, [ ],
+        false, 
+        [ ],
         function (connection, event) {
           return  new Promise((resolve, reject) => {
             resolve("Не має коду, використовується між серверами");
           })
         } 
-    ) 
+      ),
+      [false, false, false]
   )

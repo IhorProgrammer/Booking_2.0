@@ -4,26 +4,33 @@ import { FormsModule } from '@angular/forms';
 import ResponseTemplate from '../../Classes/AppSetting/ResponseTemplate';
 import { LoadingBarComponent } from "../loading-bar/loading-bar.component";
 import { ActivatedRoute } from '@angular/router';
+import { ViewComponentComponent } from '../view-component/view-component.component';
 
 @Component({
   selector: 'bkng-method-item',
   standalone: true,
-  imports: [FormsModule, LoadingBarComponent],
+  imports: [FormsModule, LoadingBarComponent, ViewComponentComponent],
   templateUrl: './method-item.component.html',
   styleUrl: './method-item.component.scss'
 })
 export class MethodItemComponent  implements OnInit {
   @Input({required: true, alias: "data"}) data!: MethodInfoClass; 
-  condition = signal("Code");
+  condition = signal("");
 
-  public get ConditionsArray() : string[] {
-    return ["Code", "View", "Response"];
-  }
+  public ConditionsArray!: string[]; 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.snapshot.data['data']().then((x: MethodInfoClass) => {
-      this.data = x
+      this.data = x;
+
+      let ConditionsArrayTemp = [];
+      if( this.data.codeShow ) ConditionsArrayTemp.push("Code");
+      if( this.data.responseShow ) ConditionsArrayTemp.push("Response");
+      if( this.data.viewShow ) ConditionsArrayTemp.push("View");
+      this.ConditionsArray = ConditionsArrayTemp;
+
+      this.condition.set(this.ConditionsArray[0] ?? "");
     });
   }
 

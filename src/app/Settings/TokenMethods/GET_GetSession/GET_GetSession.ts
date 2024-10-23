@@ -46,5 +46,6 @@ export default new MethodInfoClass(
             })
           })
         } 
-    ) 
+      ),
+      [true, false, true] 
   )

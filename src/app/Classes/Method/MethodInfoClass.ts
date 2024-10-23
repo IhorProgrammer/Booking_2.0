@@ -2,6 +2,7 @@ import { timeout } from "rxjs";
 import Connection, { ConnectionName } from "../AppSetting/Connection";
 import ResponseTemplate from "../AppSetting/ResponseTemplate";
 import { MethodFormClass } from "./MethodFormClass";
+import { ViewMethodClass } from "./ViewMethodClass";
 
 export class MethodInfoClass {
     
@@ -39,7 +40,6 @@ export class MethodInfoClass {
 
     public Submit(event: SubmitEvent) {
         event?.preventDefault();
-        console.log(event);
         this._loading = true;
         const res = this.form.submit(this.connection, event ).then((res: any) => {
             setTimeout(() => { 
@@ -53,13 +53,30 @@ export class MethodInfoClass {
     }
 
 
+    public viewShow: boolean;
+    public responseShow: boolean;
+    public codeShow: boolean;
 
-    constructor(name: string, methodName: string, text: string, connectionName: ConnectionName, form: MethodFormClass) {
+    public ViewTemplate: ViewMethodClass;
+
+    constructor(
+        name: string,
+        methodName: string,
+        text: string,
+        connectionName: ConnectionName,
+        form: MethodFormClass,
+        [codeShow, viewShow, responseShow ]: boolean[] = [true, true, true],
+        ViewTemplate: ViewMethodClass = new ViewMethodClass("", ""),
+    ){
         this._name = name;
         this._text = text;
         this._methodName = methodName;
         this._connection = Connection.instance.get(connectionName);
         this.form = form;
+        this.viewShow = viewShow;
+        this.responseShow = responseShow;
+        this.codeShow = codeShow;
+        this.ViewTemplate = ViewTemplate;
     }
 
 }

@@ -3,6 +3,7 @@ import { ConnectionName } from "../../../Classes/AppSetting/Connection";
 import { MethodFieldClass } from "../../../Classes/Method/MethodFieldClass";
 import { MethodFormClass } from "../../../Classes/Method/MethodFormClass";
 import { MethodInfoClass } from "../../../Classes/Method/MethodInfoClass";
+import { ViewMethodClass } from "../../../Classes/Method/ViewMethodClass";
 
 export default new MethodInfoClass( 
       "Авторизація користувачів", 
@@ -12,8 +13,8 @@ export default new MethodInfoClass(
       new MethodFormClass( 
         true,
         [ 
-          new MethodFieldClass("login", "логін", "text", "la"), 
-          new MethodFieldClass("password", "пароль", "password", "123") 
+          new MethodFieldClass("login", "логін", "text", ""), 
+          new MethodFieldClass("password", "пароль", "password", "") 
         ],
         function (connection, event) {
           //GET  UserAgent 
@@ -50,5 +51,7 @@ export default new MethodInfoClass(
             })
           })
         } 
-    ) 
+    ),
+    [true, true, true],
+    new ViewMethodClass("method-template/client/user_data/user_data.html","")
   )

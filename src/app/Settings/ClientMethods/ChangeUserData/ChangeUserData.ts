@@ -2,7 +2,8 @@ import AES from "../../../Classes/AES/AES";
 import { ConnectionName } from "../../../Classes/AppSetting/Connection";
 import { MethodFieldClass } from "../../../Classes/Method/MethodFieldClass";
 import { MethodFormClass } from "../../../Classes/Method/MethodFormClass";
-import { MethodInfoClass } from "../../../Classes/Method/MethodInfoClass";
+import { GetFormData, MethodInfoClass } from "../../../Classes/Method/MethodInfoClass";
+import { ViewMethodClass } from "../../../Classes/Method/ViewMethodClass";
 
 export default new MethodInfoClass( 
       "Зміна даних користувача", 
@@ -29,10 +30,10 @@ export default new MethodInfoClass(
           // Отримуємо форму
           const form = event.target; 
           //_________________ВАЛІДАЦІЯ ДАНИХ______________________
-          
-          const formData = new FormData(event.target);
-          const userData = JSON.parse(localStorage.getItem('user_data') ?? "");
 
+          const formData = GetFormData(form)
+
+          const userData = JSON.parse(localStorage.getItem('user_data') ?? "");
           formData.set("id", userData.id )
           formData.set("nickname", userData.nickname )
 
@@ -59,5 +60,7 @@ export default new MethodInfoClass(
               return res;
           });
         } 
-    ) 
+    ),
+    [true, true, true],
+    new ViewMethodClass("method-template/client/user_data/user_data.html","")
   )

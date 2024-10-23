@@ -2,6 +2,7 @@ import AES from "../../../Classes/AES/AES";
 import { ConnectionName } from "../../../Classes/AppSetting/Connection";
 import { MethodFormClass } from "../../../Classes/Method/MethodFormClass";
 import { MethodInfoClass } from "../../../Classes/Method/MethodInfoClass";
+import { ViewMethodClass } from "../../../Classes/Method/ViewMethodClass";
 
 export default new MethodInfoClass( 
       "Авторизація Google [/google/{userAgent}]", 
@@ -13,6 +14,29 @@ export default new MethodInfoClass(
         [ 
         ],
         function (connection, event) {
+
+          if (!window.confirm("Do you whant GoogleAuth?")) {
+            const url = window.location.href;
+            const urlParams = new URLSearchParams(new URL(url).search);
+
+            const res = {
+                id: urlParams.get('id'),
+                avatar: urlParams.get('avatar'),
+                given_name: urlParams.get('given_name'),
+                family_name: urlParams.get('family_name'),
+                nickname: urlParams.get('nickname'),
+                email: urlParams.get('email'),
+                phone: urlParams.get('phone'),
+                birthday: urlParams.get('birthday'),
+                gender: urlParams.get('gender'),
+                citizenship: urlParams.get('citizenship'),
+            }
+            return  new Promise((resolve, reject) => {
+              resolve(res);
+            })
+          }
+
+
           //Отримання токену
           const token = localStorage.getItem('dc_auth_key');
           if( token == null ) {
@@ -35,6 +59,9 @@ export default new MethodInfoClass(
             }
             return res;
           });
+          return null;
         } 
-    ) 
+    ),
+    [true, true, true],
+    new ViewMethodClass("method-template/token/google_auth.html", "") 
   )

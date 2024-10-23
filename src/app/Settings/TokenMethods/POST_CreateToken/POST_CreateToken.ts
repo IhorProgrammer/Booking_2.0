@@ -33,5 +33,6 @@ export default new MethodInfoClass(
               return res;
           });
         } 
-    ) 
+      ), 
+      [true, false, true] 
   )

@@ -3,6 +3,7 @@ import { ConnectionName } from "../../../Classes/AppSetting/Connection";
 import { MethodFieldClass } from "../../../Classes/Method/MethodFieldClass";
 import { MethodFormClass } from "../../../Classes/Method/MethodFormClass";
 import { GetFormData, MethodInfoClass } from "../../../Classes/Method/MethodInfoClass";
+import { ViewMethodClass } from "../../../Classes/Method/ViewMethodClass";
 
 export default new MethodInfoClass( 
       "Реєстрація користувачів", 
@@ -55,6 +56,8 @@ export default new MethodInfoClass(
                 }
                 return res;
             });
-        } 
-    ) 
+        },
+        ),
+        [true, true, true],
+        new ViewMethodClass("method-template/client/user_data/user_data.html","")
   )
