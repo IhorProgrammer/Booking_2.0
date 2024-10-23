@@ -34,6 +34,8 @@ export class MethodItemComponent  implements OnInit {
     });
   }
 
+
+
   public get Response(): string {
     return ResponseTemplate.Get;
   }
@@ -45,7 +47,7 @@ export class MethodItemComponent  implements OnInit {
   }
 
   public copyCode(): void {
-    navigator.clipboard.writeText(this.data.form.submit.toString())
+    navigator.clipboard.writeText(JSON.stringify(this.data.form.submit, null, 2))
     .then(() => {
       this._copyCodeText = "Save";    
       setTimeout(() => { this._copyCodeText = "Copy" },2000)

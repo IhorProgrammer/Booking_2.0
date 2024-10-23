@@ -31,6 +31,9 @@ export default new MethodInfoClass(
                 gender: urlParams.get('gender'),
                 citizenship: urlParams.get('citizenship'),
             }
+
+            localStorage.setItem("user_data", JSON.stringify(res));
+
             return  new Promise((resolve, reject) => {
               resolve(res);
             })

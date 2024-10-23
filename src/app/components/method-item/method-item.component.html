@@ -13,7 +13,7 @@
                 <div class="form-container">
                     <div class="form-title">
                         @if( data.form.encryption ) {
-                            <img src="/icon/securityn.png" alt="security">
+                            <img src="icon/securityn.png" alt="security">
                         }
                         @if( data.form.fields.length > 1 ) {
                             <h3>Form</h3>
@@ -50,7 +50,7 @@
                     @case ("Code") {
                         <div class="code-container">
                             <button class="copy-button" [class]="CopyCodeText" (click)="copyCode()">{{CopyCodeText}}</button>
-                            <pre><code>{{data.form.submit.toString()}}</code></pre>
+                            <pre><code>{{this.data.form.submit}}</code></pre>
                         </div>
                     }
                     @case ("Response") {

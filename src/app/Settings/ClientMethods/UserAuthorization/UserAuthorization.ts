@@ -5,6 +5,8 @@ import { MethodFormClass } from "../../../Classes/Method/MethodFormClass";
 import { MethodInfoClass } from "../../../Classes/Method/MethodInfoClass";
 import { ViewMethodClass } from "../../../Classes/Method/ViewMethodClass";
 
+/*@preserve*/
+// Цей код не буде мінімізовано
 export default new MethodInfoClass( 
       "Авторизація користувачів", 
       "GET",
