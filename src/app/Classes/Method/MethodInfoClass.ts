@@ -83,7 +83,7 @@ export class MethodInfoClass {
 
 export function GetFormData(formHTML: HTMLFormElement): FormData {
     
-    const formElements = formHTML.querySelectorAll('[ng-reflect-name]') as NodeListOf<HTMLInputElement>;
+    const formElements = formHTML.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
     const formData = new FormData();
 
     formElements.forEach((inputElem: HTMLInputElement) => {

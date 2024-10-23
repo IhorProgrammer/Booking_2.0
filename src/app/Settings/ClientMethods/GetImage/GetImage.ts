@@ -16,7 +16,7 @@ export default new MethodInfoClass(
           new MethodFieldClass("avatar", "Avatar_URL", "text", userData()), 
         ],
         function (connection, event) {  
-          const formHTML = event.target; 
+          const formHTML = event.target;
           const formData = GetFormData(formHTML)
           return  new Promise((resolve, reject) => {
             resolve(`${connection}/image/${encodeURIComponent(formData.get("avatar") as string)}`);
