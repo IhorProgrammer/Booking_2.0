@@ -1,10 +1,63 @@
 
-<img src="http://localhost:5082/image/_-data.data.avatar-_" alt=_-data.data.id-_>
-<p>_-data.data.given_name-_ _-data.data.family_name-_ (@_-data.data.nickname-_)</p>
-<p>Email: _-data.data.email-_</p>
-<p>Phone: _-data.data.phone-_</p>
-<p>Birthday: _-data.data.birthday-_</p>
-<p>Citizenship: _-data.data.citizenship-_</p>
-<p>Gender: _-data.data.gender-_</p>
+<link rel="stylesheet" href="user_data.css">
+<div class="profile-container">
+    <div class="profile-card">
+        <h2>Профіль</h2>
+        <div class="profile-info">
+            <img src="http://localhost:5082/image/_-data.data.avatar-_" alt="Avatar" class="profile-photo">
+            <div class="profile-details">
+                <div>
+                    <strong>Ім'я:</strong> 
+                    <p>_-data.data.given_name-_</p>
+                </div>
+                <div>
+                    <strong>Прізвище:</strong>  
+                    <p>_-data.data.family_name-_</p>
+                </div>
+                <div>
+                    <strong>Нікнейм:</strong>
+                    <p>_-data.data.nickname-_</p>
+                </div>
+                <div>
+                    <strong>Вік:</strong>  
+                    <p>?? років</p>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-profile-details">
+            <div>
+                <strong>Стать:</strong>  
+                <p>_-data.data.gender-_</p>
+            </div>
+            <div>
+                <strong>Дата народження:</strong> 
+                <p>_-data.data.birthday-_</p>
+            </div>
+            <div>
+                <strong>Країна/Регіон:</strong> 
+                <p>_-data.data.citizenship-_</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="account-security">
+        <h2>Безпека облікового запису</h2>
+        <div>
+            <label for="email">Електронна пошта</label>
+            <div id="email" class="input_acaunt_security">_-data.data.email-_</div>
+        </div>
+
+        <div>
+            <label for="phone">Номер телефону</label>
+            <div id="phone" class="input_acaunt_security">_-data.data.phone-_</div>
+        </div>
+
+        <div>
+            <label for="password">Пароль</label>
+            <div id="password" class="input_acaunt_security">********</div>
+        </div>
+    </div>
+</div>
+
 
 

@@ -62,5 +62,5 @@ export default new MethodInfoClass(
         } 
     ),
     [true, true, true],
-    new ViewMethodClass("method-template/client/user_data/user_data.html","")
+    new ViewMethodClass("method-template/client/user_data/user_data.html","method-template/client/user_data/user_data.css")
   )

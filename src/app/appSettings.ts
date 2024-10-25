@@ -88,6 +88,28 @@ const paths: LinkInfo = new LinkInfo(
                 ),
             ]
         ),
+        new LinkInfo(
+            "Residence_API",
+            "residence",
+            undefined,
+            [
+                new LinkInfo(
+                    "Categories",
+                    "residence-categories",
+                    import("./Settings/ResidenceMethods/GET_GetCategories"),  
+                ),
+                new LinkInfo(
+                    "Search",
+                    "residence-search",
+                    import("./Settings/ResidenceMethods/GET_Search"),  
+                ),
+                new LinkInfo(
+                    "Info",
+                    "residence-info",
+                    import("./Settings/ResidenceMethods/GET_HotelInfo"),  
+                )
+            ]
+        )
     ]
 );
 

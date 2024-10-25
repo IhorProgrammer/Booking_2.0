@@ -14,6 +14,7 @@ export default class Connection {
         switch(connectionName) {
             case ConnectionName.Client: return this.ClientConnection;
             case ConnectionName.Token: return this.TokenConnection;
+            case ConnectionName.Residence: return this.ResidenceConnection;
         }
     }
 
@@ -25,10 +26,16 @@ export default class Connection {
         return appsetting.connection.TokenServer;
     }
     
+    
+    private get ResidenceConnection() : string {
+        return appsetting.connection.ResidenceServer;
+    }
+
     constructor() {}
 }
 
 export enum ConnectionName {
     Client,
     Token,
+    Residence
 }

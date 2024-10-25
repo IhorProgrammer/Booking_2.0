@@ -20,8 +20,9 @@ export default new MethodInfoClass(
             const urlParams = new URLSearchParams(new URL(url).search);
 
             const res = {
+              data: {
                 id: urlParams.get('id'),
-                avatar: urlParams.get('avatar'),
+                avatar: encodeURIComponent(urlParams.get('avatar') ?? ""),
                 given_name: urlParams.get('given_name'),
                 family_name: urlParams.get('family_name'),
                 nickname: urlParams.get('nickname'),
@@ -30,6 +31,7 @@ export default new MethodInfoClass(
                 birthday: urlParams.get('birthday'),
                 gender: urlParams.get('gender'),
                 citizenship: urlParams.get('citizenship'),
+              }
             }
 
             localStorage.setItem("user_data", JSON.stringify(res));
@@ -66,5 +68,5 @@ export default new MethodInfoClass(
         } 
     ),
     [true, true, true],
-    new ViewMethodClass("method-template/token/google_auth.html", "") 
+    new ViewMethodClass("method-template/client/user_data/user_data.html","method-template/client/user_data/user_data.css")
   )

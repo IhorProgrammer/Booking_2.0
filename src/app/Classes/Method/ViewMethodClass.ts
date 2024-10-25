@@ -9,5 +9,6 @@ export class ViewMethodClass {
 
     constructor(HTML: string, CSS: string) {
         if( HTML != "" ) this.HTML = HTML;
+        if( CSS != "" ) this.CSS = CSS;
     }
 } 

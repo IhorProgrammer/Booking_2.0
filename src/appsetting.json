@@ -1,7 +1,8 @@
 {
     "connection": {
         "ClientServer": "http://localhost:5082",
-        "TokenServer": "http://localhost:5083"
+        "TokenServer": "http://localhost:5083",
+        "ResidenceServer": "http://localhost:5254"
     },
     "response_template":
     {

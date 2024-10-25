@@ -57,7 +57,11 @@
                         <div class="json-container"><pre>{{data.Response}}</pre></div>
                     }
                     @case ("View" ) {
-                        <bkng-view-component [template-url]="data.ViewTemplate.HTML ?? ''" [data]="data.Response"></bkng-view-component>
+                        <bkng-view-component 
+                        [html]="data.ViewTemplate.HTML ?? ''" 
+                        [css]="data.ViewTemplate.CSS ?? ''" 
+                        [data]="data.Response"
+                        ></bkng-view-component>
                     }
                 }
                 

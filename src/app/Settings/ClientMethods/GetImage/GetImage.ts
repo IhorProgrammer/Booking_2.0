@@ -24,7 +24,7 @@ export default new MethodInfoClass(
         } 
       ),
       [false, true, false],
-      new ViewMethodClass("method-template/client/image/image.html", "")
+      new ViewMethodClass("method-template/client/image/image.html", "method-template/client/image/image.css")
 )
 
 function userData(): string {
