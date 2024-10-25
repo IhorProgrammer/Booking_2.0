@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+h1 {
+    color: white;
+}
+
+img {
+    background-color: white;
+    border: 1px solid black;
+    width:  260px;
+    height: 260px;
+    border-radius: 10px;
+}

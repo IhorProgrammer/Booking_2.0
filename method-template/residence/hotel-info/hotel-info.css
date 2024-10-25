@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;    
+    margin: 20px 0;
+}
+
+.container p {
+    color: white;
+}
+
+.container > div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container img{
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+}
+
+.container img:empty  {
+    border: 1px solid white;
+    border-radius: 0px;
+}
